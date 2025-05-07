@@ -16,7 +16,7 @@
     <Description>Add borders to an image and embeds author/EXIF information with a film aesthetic.</Description>
     <Copyright>© 2025 Garth TB. All rights reserved.</Copyright>
     <PackageIcon>icon.png</PackageIcon>
-    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageReadmeFile>README_en.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/GarthTB/FrameSeal</RepositoryUrl>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
@@ -28,25 +28,20 @@
 
   <ItemGroup>
     <Content Include="Assets\icon.ico" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="..\README.md">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
-    <PackageReference Include="Magick.NET-Q16-AnyCPU" Version="14.6.0" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Update="Assets\icon.png">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
+    <None Include="..\README_en.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\README_zh.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+    <PackageReference Include="Magick.NET-Q16-AnyCPU" Version="14.6.0" />
   </ItemGroup>
 
 </Project>
