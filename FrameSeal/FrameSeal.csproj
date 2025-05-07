@@ -16,7 +16,7 @@
     <Description>Add borders to an image and embeds author/EXIF information with a film aesthetic.</Description>
     <Copyright>© 2025 Garth TB. All rights reserved.</Copyright>
     <PackageIcon>icon.png</PackageIcon>
-    <PackageReadmeFile>README_en.md</PackageReadmeFile>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/GarthTB/FrameSeal</RepositoryUrl>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
@@ -32,7 +32,7 @@
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
-    <None Include="..\README_en.md">
+    <None Include="..\README.md">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
