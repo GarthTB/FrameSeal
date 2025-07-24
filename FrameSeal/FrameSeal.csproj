@@ -6,13 +6,29 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
+    <AssemblyName>Frame Seal</AssemblyName>
+    <Product>Frame Seal</Product>
+    <ApplicationIcon>Assets\favicon.ico</ApplicationIcon>
+    <Version>1.2.0</Version>
+    <Authors>GarthTB | 天卜 &lt;g-art-h@outlook.com&gt;</Authors>
+    <Company>GarthTB | 天卜 &lt;g-art-h@outlook.com&gt;</Company>
+    <Copyright>Copyright (c) 2025 GarthTB | 天卜. All rights reserved.</Copyright>
+    <Description>Adds a film-like border to images and embeds author and EXIF metadata. | 为图片添加类似胶片的边框并嵌入作者及EXIF元数据。</Description>
+    <RepositoryUrl>https://github.com/GarthTB/FrameSeal</RepositoryUrl>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DebugType>none</DebugType>
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Assets\" />
+    <None Include="..\LICENSE" />
+    <None Include="..\README.md" />
     <Folder Include="Models\" />
     <Folder Include="Services\" />
     <Folder Include="ViewModels\" />
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+    <PackageReference Include="Magick.NET-Q16-AnyCPU" Version="14.7.0" />
   </ItemGroup>
 
 </Project>
