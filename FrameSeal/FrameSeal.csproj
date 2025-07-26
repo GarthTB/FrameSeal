@@ -13,7 +13,7 @@
     <Authors>GarthTB | 天卜 &lt;g-art-h@outlook.com&gt;</Authors>
     <Company>GarthTB | 天卜 &lt;g-art-h@outlook.com&gt;</Company>
     <Copyright>Copyright (c) 2025 GarthTB | 天卜. All rights reserved.</Copyright>
-    <Description>Adds film-style border to photo, showing EXIF metadata and author info. / 为照片添加仿胶片的边框，展示EXIF元数据及作者信息。</Description>
+    <Description>Adds film-style border to image, showing EXIF metadata and author info. / 为图像添加仿胶片的边框，展示EXIF元数据及作者信息。</Description>
     <RepositoryUrl>https://github.com/GarthTB/FrameSeal</RepositoryUrl>
   </PropertyGroup>
 
