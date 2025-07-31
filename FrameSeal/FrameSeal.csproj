@@ -2,24 +2,19 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net9.0-windows</TargetFramework>
+    <TargetFramework>net10.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
-    <ApplicationIcon>Assets\icon.ico</ApplicationIcon>
-    <PackageId>FrameSeal</PackageId>
-    <Title>Frame Seal</Title>
-    <Version>1.1.0</Version>
-    <Authors>Garth TB</Authors>
-    <Company>Garth TB</Company>
+    <AssemblyName>Frame Seal</AssemblyName>
     <Product>Frame Seal</Product>
-    <Description>Add borders to an image and embeds author/EXIF information with a film aesthetic.</Description>
-    <Copyright>© 2025 Garth TB. All rights reserved.</Copyright>
-    <PackageIcon>icon.png</PackageIcon>
-    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <ApplicationIcon>Assets\favicon.ico</ApplicationIcon>
+    <Version>1.2.0</Version>
+    <Authors>GarthTB | 天卜 &lt;g-art-h@outlook.com&gt;</Authors>
+    <Company>GarthTB | 天卜 &lt;g-art-h@outlook.com&gt;</Company>
+    <Copyright>Copyright (c) 2025 GarthTB | 天卜. All rights reserved.</Copyright>
+    <Description>Adds film-style border to image, embedding EXIF metadata and author info. | 为图像添加仿胶片的边框，嵌入EXIF元数据及自定义信息。</Description>
     <RepositoryUrl>https://github.com/GarthTB/FrameSeal</RepositoryUrl>
-    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
-    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -27,21 +22,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="Assets\icon.ico" />
-    <None Update="Assets\icon.png">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-    <None Include="..\README.md">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-    <None Include="..\README_zh.md">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
+    <None Include="..\LICENSE" />
+    <None Include="..\README.md" />
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
-    <PackageReference Include="Magick.NET-Q16-AnyCPU" Version="14.6.0" />
+    <PackageReference Include="Magick.NET-Q16-AnyCPU" Version="14.7.0" />
   </ItemGroup>
 
 </Project>
