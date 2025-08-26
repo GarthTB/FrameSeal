@@ -25,7 +25,7 @@
     <None Include="..\LICENSE" />
     <None Include="..\README.md" />
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
-    <PackageReference Include="Magick.NET-Q16-AnyCPU" Version="14.7.0" />
+    <PackageReference Include="Magick.NET-Q16-AnyCPU" Version="14.8.0" />
   </ItemGroup>
 
 </Project>
