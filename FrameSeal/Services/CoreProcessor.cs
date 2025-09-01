@@ -23,12 +23,14 @@ internal static class CoreProcessor
         ct?.ThrowIfCancellationRequested();
         var result = image.AddBorder(
             settings.BorderColor, settings.BorderSize);
+        var exif = image.GetExifProfile();
+        if (exif is not null)
+            result.SetProfile(exif); // 转移原EXIF
         var bottomH = image.Height * settings.BorderSize.Bottom;
-        if (bottomH == 0) // 无下边框
+        if (Math.Round(bottomH) == 0) // 无下边框
             return result;
 
         ct?.ThrowIfCancellationRequested();
-        var exif = image.GetExifProfile();
         var items = settings.ExifStrategies.Select(func => func(exif))
             .Where(s => !string.IsNullOrWhiteSpace(s));
         var info = string.Join("  ", items);
