@@ -2,7 +2,7 @@
 
 [![用前必读 README.md](https://img.shields.io/badge/用前必读-README.md-red)](https://github.com/GarthTB/FrameSeal/blob/master/README.md)
 [![开发框架 .NET 10.0](https://img.shields.io/badge/开发框架-.NET%2010.0-blueviolet)](https://dotnet.microsoft.com/zh-cn/download/dotnet/10.0)
-[![最新版本 1.2.2](https://img.shields.io/badge/最新版本-1.2.2-brightgreen)](https://github.com/GarthTB/FrameSeal/releases/latest)
+[![最新版本 1.2.3](https://img.shields.io/badge/最新版本-1.2.3-brightgreen)](https://github.com/GarthTB/FrameSeal/releases/latest)
 [![开源协议 MIT](https://img.shields.io/badge/开源协议-MIT-brown)](https://mit-license.org/)
 
 ## 📖 项目简介
@@ -55,6 +55,12 @@
 - **项目地址**：https://github.com/GarthTB/FrameSeal
 
 ## 📝 更新日志
+
+### v1.2.3 (20250901)
+
+- 修复：Magick.NET安全性更新
+- 优化：保留原图的 EXIF 信息
+- 新增：95 质量 JPG 保存格式
 
 ### v1.2.2 (20250826)
 

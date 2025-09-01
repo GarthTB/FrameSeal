@@ -11,7 +11,7 @@
     AllowDrop="True"
     d:DataContext="{d:DesignInstance Type=vm:MainViewModel}"
     FontSize="14"
-    Title="Frame Seal 图像边框工具 v1.2.2"
+    Title="Frame Seal 图像边框工具 v1.2.3"
     UseLayoutRounding="True">
     <Window.DataContext>
         <vm:MainViewModel />
