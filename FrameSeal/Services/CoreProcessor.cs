@@ -26,8 +26,7 @@ internal static class CoreProcessor
         var exif = image.GetExifProfile();
         if (exif is not null)
             result.SetProfile(exif); // 转移原EXIF
-        var bottomH = image.Height * settings.BorderSize.Bottom;
-        if (Math.Round(bottomH) == 0) // 无下边框
+        if (settings.BorderSize.Bottom == 0) // 无下边框
             return result;
 
         ct?.ThrowIfCancellationRequested();
@@ -39,12 +38,13 @@ internal static class CoreProcessor
             return result;
 
         ct?.ThrowIfCancellationRequested();
-        var targetHeight = settings.TextHeight * bottomH;
+        var bottomHeight = image.Height * settings.BorderSize.Bottom;
+        var targetHeight = settings.TextHeight * bottomHeight;
         var (pen, ascent, textW, textH) = string.IsNullOrWhiteSpace(info)
             ? (null, 0, 0, targetHeight)
             : GetPen(info, settings.FontFamily, settings.TextColor, targetHeight);
-        var iconY = Math.Round(result.Height - bottomH / 2 - textH / 2);
-        var textX = result.Width / 2 - textW / 2;
+        var iconY = Math.Round(result.Height - bottomHeight / 2 - textH / 2);
+        var textX = result.Width / 2.0 - textW / 2;
 
         ct?.ThrowIfCancellationRequested();
         if (settings.Icon is MagickImage icon) // 会修改textX
@@ -55,10 +55,10 @@ internal static class CoreProcessor
                 icon => icon.Resize((uint)w + 1, (uint)h)); // 忽略宽度，只按高缩放
 
             var gapW = settings.IconGap * textH;
-            var iconX = Math.Round(textX - gapW / 2 - mIcon.Width / 2);
+            var iconX = Math.Round(textX - gapW / 2 - mIcon.Width / 2.0);
             result.Composite(mIcon, (int)iconX, (int)iconY, CompositeOperator.Over);
 
-            textX += gapW / 2 + mIcon.Width / 2;
+            textX += gapW / 2 + mIcon.Width / 2.0;
         }
 
         ct?.ThrowIfCancellationRequested();

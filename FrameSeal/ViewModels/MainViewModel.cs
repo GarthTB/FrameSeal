@@ -225,7 +225,7 @@ internal partial class MainViewModel : ObservableObject
         => SelectedFormatIndex >= 0
         && SelectedFormatIndex < SaveFormats.Length
         ? SaveStrategyManager.GetSaveStrategy(SaveFormats[SelectedFormatIndex])
-        : throw new InvalidOperationException("保存格式索引错误");
+        : throw new InvalidOperationException("保存格式的索引错误");
 
     /// <summary> 字体系列名称 </summary>
     public string[] FontFamilies { get; } =
@@ -242,7 +242,7 @@ internal partial class MainViewModel : ObservableObject
         => SelectedFontIndex >= 0
         && SelectedFontIndex < FontFamilies.Length
         ? FontFamilies[SelectedFontIndex]
-        : throw new InvalidOperationException("字体系列索引错误");
+        : throw new InvalidOperationException("字体系列的索引错误");
 
     #endregion
 
