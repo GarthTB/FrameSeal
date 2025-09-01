@@ -29,7 +29,7 @@ internal static class CoreProcessor
 
         ct?.ThrowIfCancellationRequested();
         var exif = image.GetExifProfile();
-        var items = settings.ExifFuncs.Select(func => func(exif))
+        var items = settings.ExifStrategies.Select(func => func(exif))
             .Where(s => !string.IsNullOrWhiteSpace(s));
         var info = string.Join("  ", items);
         if (settings.Icon is null

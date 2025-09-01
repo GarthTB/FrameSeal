@@ -6,12 +6,13 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:FrameSeal.ViewModels"
     Width="1024"
-    Height="500"
+    Height="512"
     mc:Ignorable="d"
     AllowDrop="True"
     d:DataContext="{d:DesignInstance Type=vm:MainViewModel}"
     FontSize="14"
-    Title="Frame Seal 图像边框工具 v1.2.2">
+    Title="Frame Seal 图像边框工具 v1.2.2"
+    UseLayoutRounding="True">
     <Window.DataContext>
         <vm:MainViewModel />
     </Window.DataContext>
@@ -103,7 +104,7 @@
                 </Grid.ColumnDefinitions>
                 <Label
                     VerticalContentAlignment="Center"
-                    Content="输出格式"
+                    Content="保存格式"
                     Padding="2,0,0,0" />
                 <ComboBox
                     Grid.Column="2"
