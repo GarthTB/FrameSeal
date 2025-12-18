@@ -1,31 +1,40 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <OutputType>WinExe</OutputType>
-    <TargetFramework>net10.0-windows</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <UseWPF>true</UseWPF>
-    <AssemblyName>Frame Seal</AssemblyName>
-    <Product>Frame Seal</Product>
-    <ApplicationIcon>Assets\favicon.ico</ApplicationIcon>
-    <Version>1.2.3</Version>
-    <Authors>GarthTB | 天卜 &lt;g-art-h@outlook.com&gt;</Authors>
-    <Company>GarthTB | 天卜 &lt;g-art-h@outlook.com&gt;</Company>
-    <Copyright>Copyright (c) 2025 GarthTB | 天卜. All rights reserved.</Copyright>
-    <Description>Adds film-style border to image, embedding EXIF metadata and author info. | 为图像添加仿胶片的边框，嵌入EXIF元数据及自定义信息。</Description>
-    <RepositoryUrl>https://github.com/GarthTB/FrameSeal</RepositoryUrl>
-  </PropertyGroup>
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <TargetFramework>net10.0-windows</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <UseWPF>true</UseWPF>
+        <ApplicationIcon>Resources\favicon.ico</ApplicationIcon>
+        <Version>1.2.4</Version>
+        <Title>FrameSeal</Title>
+        <Authors>GarthTB | 天卜 &lt;g-art-h@outlook.com&gt;</Authors>
+        <Description>Adds film-style border to image, embedding EXIF metadata and author info. | 为图像添加仿胶片的边框，嵌入EXIF元数据及自定义信息。</Description>
+        <Copyright>Copyright (c) 2025 GarthTB | 天卜. All rights reserved.</Copyright>
+        <PackageProjectUrl>https://github.com/GarthTB/FrameSeal</PackageProjectUrl>
+        <PackageLicenseUrl>https://mit-license.org/</PackageLicenseUrl>
+        <PackageIcon>Resources\icon.png</PackageIcon>
+        <RepositoryUrl>https://github.com/GarthTB/FrameSeal</RepositoryUrl>
+        <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+        <Company>GarthTB | 天卜 &lt;g-art-h@outlook.com&gt;</Company>
+    </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DebugType>none</DebugType>
-  </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+        <PlatformTarget>x64</PlatformTarget>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <None Include="..\LICENSE" />
-    <None Include="..\README.md" />
-    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
-    <PackageReference Include="Magick.NET-Q16-AnyCPU" Version="14.8.1" />
-  </ItemGroup>
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+        <PlatformTarget>x64</PlatformTarget>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Folder Include="Resources\"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0"/>
+        <PackageReference Include="Magick.NET-Q16-AnyCPU" Version="14.10.0"/>
+    </ItemGroup>
 
 </Project>
