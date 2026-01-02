@@ -13,7 +13,8 @@ using ImageMagick;
 /// <param name="TextRatio"> 文字比例（下边框高的倍数）[0,) </param>
 /// <param name="TextColor"> 文字颜色 </param>
 /// <param name="InfoFuncs"> 将图像信息转换为字符串的方法 </param>
-internal sealed record Config(
+/// <param name="SaveAsync"> 保存图像的方法 </param>
+internal sealed record Cfg(
     string[] ImgPaths,
     string? IconPath,
     double IconGap,
@@ -23,7 +24,8 @@ internal sealed record Config(
     string FontName,
     double TextRatio,
     string TextColor,
-    Func<IExifProfile?, string>[] InfoFuncs)
+    Func<IExifProfile?, string>[] InfoFuncs,
+    Func<MagickImage, string, Task> SaveAsync)
 {
     /// <summary> 检查配置，若无效则抛出异常 </summary>
     public void ThrowIfInvalid() {

@@ -63,9 +63,7 @@ internal static class InfoFuncs
     /// <summary> 获取光圈F值 </summary>
     private static string GetFNumber(IExifProfile? exif) {
         var a = exif?.GetValue(ExifTag.FNumber)?.Value.ToDouble();
-        return a switch {
-            > 50 => $"f/{a:0}", > 4 => $"f/{a:0.#}", > 0 => $"f/{a:0.##}", _ => Tofu
-        };
+        return a switch { >= 8 => $"f/{a:0.#}", > 0 => $"f/{a:0.##}", _ => Tofu };
     }
 
     /// <summary> 获取ISO感光度 </summary>
