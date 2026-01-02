@@ -3,7 +3,6 @@ namespace FrameSeal.Core;
 using ImageMagick;
 
 /// <summary> 处理配置 </summary>
-/// <param name="ImgPaths"> 待处理图像的路径 </param>
 /// <param name="IconPath"> 图标路径（null时禁用） </param>
 /// <param name="IconGap"> 图标与文字的间距（文字高度的倍数） </param>
 /// <param name="CornerRatio"> 圆角比例（图像短边长的倍数）[0, 0.5] </param>
@@ -13,9 +12,7 @@ using ImageMagick;
 /// <param name="TextRatio"> 文字比例（下边框高的倍数）[0,) </param>
 /// <param name="TextColor"> 文字颜色 </param>
 /// <param name="InfoFuncs"> 将图像信息转换为字符串的方法 </param>
-/// <param name="SaveAsync"> 保存图像的方法 </param>
 internal sealed record Cfg(
-    string[] ImgPaths,
     string? IconPath,
     double IconGap,
     double CornerRatio,
@@ -24,13 +21,10 @@ internal sealed record Cfg(
     string FontName,
     double TextRatio,
     string TextColor,
-    Func<IExifProfile?, string>[] InfoFuncs,
-    Func<MagickImage, string, Task> SaveAsync)
+    Func<IExifProfile?, string>[] InfoFuncs)
 {
     /// <summary> 检查配置，若无效则抛出异常 </summary>
     public void ThrowIfInvalid() {
-        if (ImgPaths.Length == 0)
-            throw new ArgumentException("没有待处理的图像", nameof(ImgPaths));
         if (CornerRatio is < 0 or > 0.5)
             throw new ArgumentOutOfRangeException(
                 nameof(CornerRatio),
