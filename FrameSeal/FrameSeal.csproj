@@ -6,18 +6,18 @@
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <UseWPF>true</UseWPF>
-        <ApplicationIcon>Resources\favicon.ico</ApplicationIcon>
-        <Version>1.2.4</Version>
-        <Title>FrameSeal</Title>
-        <Authors>GarthTB | 天卜 &lt;g-art-h@outlook.com&gt;</Authors>
-        <Description>Adds film-style border to image, embedding EXIF metadata and author info. | 为图像添加仿胶片的边框，嵌入EXIF元数据及自定义信息。</Description>
-        <Copyright>Copyright (c) 2025 GarthTB | 天卜. All rights reserved.</Copyright>
+        <AssemblyName>Frame Seal</AssemblyName>
+        <ApplicationIcon>Resources\icon.ico</ApplicationIcon>
+        <Version>1.3.0</Version>
+        <Title>Frame Seal</Title>
+        <Authors>Garth TB | 天卜 &lt;g-art-h@outlook.com&gt;</Authors>
+        <Description>Adds film-style border to image, embedding EXIF metadata and author info | 为图像添加仿胶片的边框，嵌入EXIF元数据及作者信息</Description>
+        <Copyright>Copyright (c) 2026 GarthTB | 天卜</Copyright>
         <PackageProjectUrl>https://github.com/GarthTB/FrameSeal</PackageProjectUrl>
         <PackageLicenseUrl>https://mit-license.org/</PackageLicenseUrl>
         <PackageIcon>Resources\icon.png</PackageIcon>
-        <RepositoryUrl>https://github.com/GarthTB/FrameSeal</RepositoryUrl>
-        <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-        <Company>GarthTB | 天卜 &lt;g-art-h@outlook.com&gt;</Company>
+        <Company>Garth TB | 天卜 &lt;g-art-h@outlook.com&gt;</Company>
+        <Product>Frame Seal</Product>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
@@ -26,15 +26,20 @@
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
         <PlatformTarget>x64</PlatformTarget>
+        <DebugType>none</DebugType>
     </PropertyGroup>
 
     <ItemGroup>
-        <Folder Include="Resources\"/>
+        <Page Update="Views\MainWindow.xaml">
+            <Generator>MSBuild:Compile</Generator>
+            <XamlRuntime>Wpf</XamlRuntime>
+            <SubType>Designer</SubType>
+        </Page>
     </ItemGroup>
 
     <ItemGroup>
         <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0"/>
-        <PackageReference Include="Magick.NET-Q16-AnyCPU" Version="14.10.0"/>
+        <PackageReference Include="Magick.NET-Q16-x64" Version="14.10.1"/>
     </ItemGroup>
 
 </Project>

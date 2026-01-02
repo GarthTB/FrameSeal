@@ -1,36 +1,12 @@
 ﻿namespace FrameSeal.Views;
 
-using System.Windows;
-using System.Windows.Controls;
 using ViewModels;
 
+/// <summary> 主窗口的交互逻辑 </summary>
 public sealed partial class MainWindow
 {
-    public MainWindow() => InitializeComponent();
-
-    /// <summary> 向ListBox中拖拽待处理的图像 </summary>
-    private void ListBox_Drop(object sender, DragEventArgs e) {
-        if (DataContext is not MainViewModel vm
-         || sender is not ListBox
-         || e.Data.GetData(DataFormats.FileDrop) is not string[] paths)
-            return;
-
-        foreach (var path in paths.Where(path => !vm.ImagePaths.Contains(path)))
-            vm.ImagePaths.Add(path);
-        vm.RunCommand.NotifyCanExecuteChanged();
-    }
-
-    /// <summary> 向CheckBox中拖拽图标 </summary>
-    private void CheckBox_Drop(object sender, DragEventArgs e) {
-        if (DataContext is not MainViewModel vm
-         || sender is not CheckBox
-         || e.Data.GetData(DataFormats.FileDrop) is not string[] paths)
-            return;
-
-        try {
-            vm.Icon = new(paths[0]);
-        } catch {
-            vm.Icon = null;
-        }
+    public MainWindow() {
+        InitializeComponent();
+        DataContext = new MainViewModel();
     }
 }

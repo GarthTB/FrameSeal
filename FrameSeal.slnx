@@ -1,7 +1,3 @@
 <Solution>
-    <Folder Name="/Metadata/">
-        <File Path="LICENSE"/>
-        <File Path="README.md"/>
-    </Folder>
     <Project Path="FrameSeal/FrameSeal.csproj"/>
 </Solution>
