@@ -4,12 +4,11 @@ using System.IO;
 using ImageMagick;
 
 /// <summary> 提供保存图像的方法 </summary>
-internal static class SaveFuncs
+internal static class SaveActions
 {
     /// <summary> 保存图像的方法 </summary>
-    private static readonly Dictionary<string, Func<MagickImage, string, Task>> Funcs = new() {
-        ["BMP"]
-            = static (img, inPath) => img.WriteAsync(GenOutPath(inPath, "bmp"), MagickFormat.Bmp),
+    private static readonly Dictionary<string, Action<MagickImage, string>> Actions = new() {
+        ["BMP"] = static (img, inPath) => img.Write(GenOutPath(inPath, "bmp"), MagickFormat.Bmp),
         ["JPG 80质量"] = static (img, inPath) => SaveJpg(img, inPath, 80),
         ["JPG 90质量"] = static (img, inPath) => SaveJpg(img, inPath, 90),
         ["JPG 99质量"] = static (img, inPath) => SaveJpg(img, inPath, 99),
@@ -20,19 +19,19 @@ internal static class SaveFuncs
         ["PNG 16位RGBA"] = static (img, inPath) => SavePng(img, inPath, MagickFormat.Png64),
         ["WebP 无损"] = static (img, inPath) => {
             img.Settings.SetDefine(MagickFormat.WebP, "lossless", true);
-            return img.WriteAsync(GenOutPath(inPath, "webp"), MagickFormat.WebP);
+            img.Write(GenOutPath(inPath, "webp"), MagickFormat.WebP);
         }
     };
 
     /// <summary> 所有可用方法的键名 </summary>
-    public static IReadOnlyCollection<string> Keys => Funcs.Keys;
+    public static IReadOnlyCollection<string> Keys => Actions.Keys;
 
     /// <summary> 获取保存图像的方法 </summary>
     /// <param name="key"> 键名 </param>
-    /// <returns> 委托：输入<see cref="MagickImage"/>和源路径，异步保存至同目录 </returns>
-    public static Func<MagickImage, string, Task> Get(string key) =>
-        Funcs.TryGetValue(key, out var func)
-            ? func
+    /// <returns> 委托：输入<see cref="MagickImage"/>和源路径，保存至同目录 </returns>
+    public static Action<MagickImage, string> Get(string key) =>
+        Actions.TryGetValue(key, out var action)
+            ? action
             : throw new KeyNotFoundException($"不支持保存为`{key}`");
 
     /// <summary> 生成输出路径 </summary>
@@ -54,21 +53,19 @@ internal static class SaveFuncs
     /// <param name="img"> 待保存的图像 </param>
     /// <param name="inPath"> 原始图像路径 </param>
     /// <param name="quality"> JPG质量 </param>
-    /// <returns> 异步保存任务 </returns>
-    private static Task SaveJpg(MagickImage img, string inPath, uint quality) {
+    private static void SaveJpg(MagickImage img, string inPath, uint quality) {
         img.Quality = quality;
         img.Settings.SetDefine(MagickFormat.Pjpeg, "arithmetic-coding", true);
         img.Settings.SetDefine(MagickFormat.Pjpeg, "sampling-factor", "4:2:0");
-        return img.WriteAsync(GenOutPath(inPath, "jpg"), MagickFormat.Pjpeg);
+        img.Write(GenOutPath(inPath, "jpg"), MagickFormat.Pjpeg);
     }
 
     /// <summary> 保存为特定位深的PNG </summary>
     /// <param name="img"> 待保存的图像 </param>
     /// <param name="inPath"> 原始图像路径 </param>
     /// <param name="format"> 保存格式 </param>
-    /// <returns> 异步保存任务 </returns>
-    private static Task SavePng(MagickImage img, string inPath, MagickFormat format) {
+    private static void SavePng(MagickImage img, string inPath, MagickFormat format) {
         img.Quality = 100;
-        return img.WriteAsync(GenOutPath(inPath, "png"), format);
+        img.Write(GenOutPath(inPath, "png"), format);
     }
 }
