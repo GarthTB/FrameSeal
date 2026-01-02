@@ -12,7 +12,7 @@
         <Title>Frame Seal</Title>
         <Authors>Garth TB | 天卜 &lt;g-art-h@outlook.com&gt;</Authors>
         <Description>Adds film-style border to image, embedding EXIF metadata and author info | 为图像添加仿胶片的边框，嵌入EXIF元数据及作者信息</Description>
-        <Copyright>Copyright (c) 2026 GarthTB | 天卜</Copyright>
+        <Copyright>Copyright (c) 2026 Garth TB | 天卜</Copyright>
         <PackageProjectUrl>https://github.com/GarthTB/FrameSeal</PackageProjectUrl>
         <PackageLicenseUrl>https://mit-license.org/</PackageLicenseUrl>
         <PackageIcon>Resources\icon.png</PackageIcon>
