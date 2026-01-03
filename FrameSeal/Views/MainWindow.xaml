@@ -109,7 +109,7 @@
                     Content="保存格式" />
                 <ComboBox
                     Grid.Column="1"
-                    Padding="6,0"
+                    Padding="8,0"
                     VerticalContentAlignment="Center"
                     ItemsSource="{Binding SaveFormats}"
                     SelectedIndex="{Binding SaveFormatIdx}" />
@@ -232,7 +232,7 @@
                     VerticalContentAlignment="Center"
                     MaxLength="9"
                     Text="{Binding BorderColor, UpdateSourceTrigger=PropertyChanged}"
-                    ToolTip="#RRGGBB或#RRGGBBAA，若无效则变红&#x0a;例如：#080808FF" />
+                    ToolTip="#RRGGBB或#RRGGBBAA，若无效则变红&#x0a;例如：#080808" />
             </Grid>
             <Grid Grid.Row="8">
                 <Grid.ColumnDefinitions>
@@ -245,7 +245,7 @@
                     Content="字体名称" />
                 <ComboBox
                     Grid.Column="1"
-                    Padding="6,0"
+                    Padding="8,0"
                     VerticalContentAlignment="Center"
                     ItemsSource="{Binding FontNames}"
                     SelectedIndex="{Binding FontNameIdx}" />
@@ -282,7 +282,7 @@
                     VerticalContentAlignment="Center"
                     MaxLength="9"
                     Text="{Binding TextColor, UpdateSourceTrigger=PropertyChanged}"
-                    ToolTip="#RRGGBB或#RRGGBBAA，若无效则变红&#x0a;例如：#C0A208FF" />
+                    ToolTip="#RRGGBB或#RRGGBBAA，若无效则变红&#x0a;例如：#C0A208" />
             </Grid>
             <Grid Grid.Row="14">
                 <Grid.ColumnDefinitions>

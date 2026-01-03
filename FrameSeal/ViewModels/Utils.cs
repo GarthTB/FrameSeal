@@ -18,7 +18,7 @@ internal static class Utils
         try {
             action();
         } catch (Exception ex) {
-            if (ex is not OperationCanceledException)
+            if (ex is OperationCanceledException)
                 return;
             var msg = $"{name}时出错{FormatExMsg(ex.Message, ex.StackTrace)}";
             MessageBox.Show(msg, "异常", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -32,7 +32,7 @@ internal static class Utils
         try {
             await func();
         } catch (Exception ex) {
-            if (ex is not OperationCanceledException)
+            if (ex is OperationCanceledException)
                 return;
             var msg = $"{name}时出错{FormatExMsg(ex.Message, ex.StackTrace)}";
             MessageBox.Show(msg, "异常", MessageBoxButton.OK, MessageBoxImage.Error);

@@ -27,7 +27,7 @@ internal static class InfoFuncs
     };
 
     /// <summary> 所有可用方法的键名 </summary>
-    public static IReadOnlyCollection<string> Keys => Funcs.Keys;
+    public static IReadOnlyList<string> Keys => Funcs.Keys.ToList();
 
     /// <summary> 获取将图像信息转换为字符串的方法 </summary>
     /// <param name="key"> 键名 </param>

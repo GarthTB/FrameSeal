@@ -25,7 +25,7 @@ internal static class SaveActions
     };
 
     /// <summary> 所有可用方法的键名 </summary>
-    public static IReadOnlyCollection<string> Keys => Actions.Keys;
+    public static IReadOnlyList<string> Keys => Actions.Keys.ToList();
 
     /// <summary> 获取保存图像的方法 </summary>
     /// <param name="key"> 键名 </param>

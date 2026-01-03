@@ -113,7 +113,7 @@ internal static class Processor
             token?.ThrowIfCancellationRequested();
             img.Alpha(AlphaOption.Set);
             img.BackgroundColor = config.BorderColor;
-            img.Extent((int)l, (int)t, newW, newH);
+            img.Extent(0 - (int)l, 0 - (int)t, newW, newH);
         }
 
         void RoundCorner() {
