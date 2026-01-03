@@ -10,7 +10,7 @@ public sealed partial class MainWindow
     public MainWindow() => InitializeComponent();
 
     /// <summary> 拖放待处理的图像 </summary>
-    private void ImgPathsDrop(object sender, DragEventArgs e) {
+    private void ImgPathsDrop(object _, DragEventArgs e) {
         if (DataContext is not MainViewModel vm
          || e.Data.GetData(DataFormats.FileDrop) is not string[] paths
          || paths.Where(path => File.Exists(path) && !vm.ImgPaths.Contains(path)).ToArray() is not {
@@ -23,7 +23,7 @@ public sealed partial class MainWindow
     }
 
     /// <summary> 拖放图标 </summary>
-    private void IconPathDrop(object sender, DragEventArgs e) {
+    private void IconPathDrop(object _, DragEventArgs e) {
         if (DataContext is not MainViewModel vm
          || e.Data.GetData(DataFormats.FileDrop) is not string[] { Length: > 0 } paths
          || !File.Exists(paths[0]))

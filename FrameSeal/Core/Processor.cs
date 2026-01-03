@@ -56,7 +56,7 @@ internal static class Processor
     /// <param name="imgPaths"> 待处理图像的路径 </param>
     /// <param name="config"> 处理配置 </param>
     /// <param name="save"> 保存图像的方法 </param>
-    /// <returns> 处理失败的图像路径及错误信息 </returns>
+    /// <returns> 处理失败的图像路径及异常信息 </returns>
     public static IReadOnlyList<string> Run(
         string[] imgPaths,
         Config config,
@@ -107,7 +107,7 @@ internal static class Processor
         if (icon is {})
             textX += GetBiasAddIcon();
         token?.ThrowIfCancellationRequested();
-        _ = setPen?.Text(textX, textY + ascent, text).Draw(img);
+        setPen?.Text(textX, textY + ascent, text).Draw(img);
 
         void AddBorder() {
             token?.ThrowIfCancellationRequested();
@@ -119,7 +119,7 @@ internal static class Processor
         void RoundCorner() {
             token?.ThrowIfCancellationRequested();
             using MagickImage mask = new(MagickColors.White, newW, newH);
-            _ = new Drawables().FillColor(MagickColors.None)
+            new Drawables().FillColor(MagickColors.None)
                 .RoundRectangle(l, t, l + oldW, t + oldH, radius, radius)
                 .Draw(mask); // 内黑外白的圆角矩形
 

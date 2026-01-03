@@ -16,7 +16,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="234" />
             <ColumnDefinition />
-            <ColumnDefinition Width="272" />
+            <ColumnDefinition Width="264" />
         </Grid.ColumnDefinitions>
         <Grid Margin="12, 11">
             <Grid.RowDefinitions>
@@ -96,7 +96,7 @@
                     IsEnabled="{Binding UseIcon}"
                     MaxLength="10"
                     Text="{Binding IconGap, UpdateSourceTrigger=PropertyChanged}"
-                    ToolTip="图标与文字的间距（文字高度的倍数）&#x0a;正数使图标在文字左侧" />
+                    ToolTip="图标与文字的间距（文字高度的倍数）&#x0a;正数时图标在文字左侧" />
             </Grid>
             <Grid Grid.Row="10">
                 <Grid.ColumnDefinitions>
@@ -286,9 +286,9 @@
             </Grid>
             <Grid Grid.Row="14">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="3*" />
+                    <ColumnDefinition Width="7*" />
                     <ColumnDefinition Width="11" />
-                    <ColumnDefinition Width="5*" />
+                    <ColumnDefinition Width="9*" />
                 </Grid.ColumnDefinitions>
                 <ComboBox
                     Padding="6,0"
@@ -305,9 +305,9 @@
             </Grid>
             <Grid Grid.Row="16">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="3*" />
+                    <ColumnDefinition Width="7*" />
                     <ColumnDefinition Width="11" />
-                    <ColumnDefinition Width="5*" />
+                    <ColumnDefinition Width="9*" />
                 </Grid.ColumnDefinitions>
                 <ComboBox
                     Padding="6,0"
@@ -324,9 +324,9 @@
             </Grid>
             <Grid Grid.Row="18">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="3*" />
+                    <ColumnDefinition Width="7*" />
                     <ColumnDefinition Width="11" />
-                    <ColumnDefinition Width="5*" />
+                    <ColumnDefinition Width="9*" />
                 </Grid.ColumnDefinitions>
                 <ComboBox
                     Padding="6,0"
@@ -343,9 +343,9 @@
             </Grid>
             <Grid Grid.Row="20">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="3*" />
+                    <ColumnDefinition Width="7*" />
                     <ColumnDefinition Width="11" />
-                    <ColumnDefinition Width="5*" />
+                    <ColumnDefinition Width="9*" />
                 </Grid.ColumnDefinitions>
                 <ComboBox
                     Padding="6,0"
@@ -362,9 +362,9 @@
             </Grid>
             <Grid Grid.Row="22">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="3*" />
+                    <ColumnDefinition Width="7*" />
                     <ColumnDefinition Width="11" />
-                    <ColumnDefinition Width="5*" />
+                    <ColumnDefinition Width="9*" />
                 </Grid.ColumnDefinitions>
                 <ComboBox
                     Padding="6,0"
