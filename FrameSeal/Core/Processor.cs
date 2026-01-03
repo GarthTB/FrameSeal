@@ -39,9 +39,9 @@ internal static class Processor
         CancellationToken token) {
         token.ThrowIfCancellationRequested();
         cfg.ThrowIfInvalid();
-        using MagickImage? icon = cfg.IconPath is null
-            ? null
-            : new(cfg.IconPath);
+        using MagickImage? icon = cfg.IconPath is {}
+            ? new(cfg.IconPath)
+            : null;
         Proc(thumb, icon, cfg, token);
 
         using MemoryStream ms = new();
@@ -69,9 +69,9 @@ internal static class Processor
         if (imgPaths.Length == 0)
             throw new ArgumentException("没有待处理的图像", nameof(imgPaths));
         cfg.ThrowIfInvalid();
-        using MagickImage? icon = cfg.IconPath is null
-            ? null
-            : new(cfg.IconPath);
+        using MagickImage? icon = cfg.IconPath is {}
+            ? new(cfg.IconPath)
+            : null;
         List<string> issues = new(imgPaths.Length);
         foreach (var imgPath in imgPaths)
             try {
@@ -111,8 +111,13 @@ internal static class Processor
         var text = GetText();
         if (text.Length == 0 && icon is null)
             return;
-        Drawables pen = new();
-        var (textW, textH, ascent) = SetPenMeasureText();
+        var textColor = ParseColorOrRed(cfg.TextColor);
+        var pen = new Drawables().EnableStrokeAntialias()
+            .FillColor(textColor)
+            .Font(cfg.FontName)
+            .StrokeColor(textColor)
+            .StrokeOpacity(new(50));
+        var (textW, textH, ascent) = MeasureText();
         var textX = newW / 2d - textW / 2;
         var iconY = Math.Round(newH - bottom / 2 - textH / 2);
 
@@ -163,19 +168,12 @@ internal static class Processor
             return string.Join("  ", items);
         }
 
-        (double, double, double) SetPenMeasureText() {
-            var textColor = ParseColorOrRed(cfg.TextColor);
-            pen.EnableStrokeAntialias()
-                .FillColor(textColor)
-                .Font(cfg.FontName)
-                .StrokeColor(textColor)
-                .StrokeOpacity(new(50));
-
+        (double, double, double) MeasureText() {
             for (var (i, size, tgt) = (0, 14d, bottom * cfg.TextRatio); i < 5; i++) {
                 token?.ThrowIfCancellationRequested();
                 var m = pen.FontPointSize(size).StrokeWidth(0.02 * size).FontTypeMetrics(text)
                      ?? throw new InvalidOperationException("无法测量文字尺寸");
-                if (Math.Abs(m.TextHeight - tgt) > tgt * 0.05)
+                if (Math.Abs(m.TextHeight - tgt) > tgt * 0.1)
                     size *= tgt / m.TextHeight;
                 else
                     return (m.TextWidth, m.TextHeight, m.Ascent);
@@ -189,11 +187,11 @@ internal static class Processor
             using var mIcon = icon.CloneAndMutate(m => m.Resize(uint.MaxValue, iconH)); // 只按高缩放
 
             token?.ThrowIfCancellationRequested();
-            var gapW = cfg.IconGap * textH;
-            var iconX = Math.Round(textX - gapW / 2 - mIcon.Width / 2d);
+            var gap = cfg.IconGap * textH;
+            var iconX = Math.Round(textX - gap / 2 - mIcon.Width / 2d);
             img.Composite(mIcon, (int)iconX, (int)iconY, CompositeOperator.Over);
 
-            return gapW / 2 + mIcon.Width / 2d;
+            return gap / 2 + mIcon.Width / 2d;
         }
     }
 }
