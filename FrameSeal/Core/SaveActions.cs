@@ -9,9 +9,10 @@ internal static class SaveActions
     /// <summary> 保存图像的方法 </summary>
     private static readonly Dictionary<string, Action<MagickImage, string>> Actions = new() {
         ["BMP"] = static (img, inPath) => img.Write(GenOutPath(inPath, "bmp"), MagickFormat.Bmp),
+        ["JPG 70质量"] = static (img, inPath) => SaveJpg(img, inPath, 70),
         ["JPG 80质量"] = static (img, inPath) => SaveJpg(img, inPath, 80),
         ["JPG 90质量"] = static (img, inPath) => SaveJpg(img, inPath, 90),
-        ["JPG 99质量"] = static (img, inPath) => SaveJpg(img, inPath, 99),
+        ["JPG 96质量"] = static (img, inPath) => SaveJpg(img, inPath, 96),
         ["JPG 100质量"] = static (img, inPath) => SaveJpg(img, inPath, 100),
         ["PNG 8位RGB"] = static (img, inPath) => SavePng(img, inPath, MagickFormat.Png24),
         ["PNG 8位RGBA"] = static (img, inPath) => SavePng(img, inPath, MagickFormat.Png32),
@@ -37,7 +38,6 @@ internal static class SaveActions
     /// <summary> 生成输出路径 </summary>
     /// <param name="inPath"> 原始图像路径 </param>
     /// <param name="ext"> 输出文件的扩展名 </param>
-    /// <returns> 输出图像路径 </returns>
     private static string GenOutPath(string inPath, string ext) {
         var dir = Path.GetDirectoryName(inPath);
         if (!Path.Exists(dir))

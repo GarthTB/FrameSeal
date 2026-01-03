@@ -39,6 +39,9 @@ internal sealed class Config(
             $"圆角比例`{cornerRatio}`超出[0, 0.5]范围")
         : cornerRatio;
 
+    /// <summary> 图标与文字的间距（文字高度的倍数） </summary>
+    private readonly double _iconGap = iconGap;
+
     /// <summary> 图标路径（null时禁用） </summary>
     private readonly string? _iconPath = iconPath;
 
@@ -53,9 +56,6 @@ internal sealed class Config(
     /// <summary> 字体名称 </summary>
     public readonly string FontName = fontName;
 
-    /// <summary> 图标与文字的间距（文字高度的倍数） </summary>
-    public readonly double IconGap = iconGap;
-
     /// <summary> 将图像信息转换为字符串的方法 </summary>
     public readonly Func<IExifProfile?, string>[] InfoFuncs = infoFuncs;
 
@@ -68,10 +68,6 @@ internal sealed class Config(
             ? new(_iconPath)
             : null;
 
-    /// <summary> 获取圆角半径（像素） </summary>
-    /// <param name="minSide"> 图像的短边长（像素） </param>
-    public double GetCornerRadius(double minSide) => _cornerRatio * minSide;
-
     /// <summary> 获取边框宽度（像素） </summary>
     /// <param name="w"> 图像宽度 </param>
     /// <param name="h"> 图像高度 </param>
@@ -79,9 +75,17 @@ internal sealed class Config(
         ((uint)Math.Round(_borderRatio.T * h), (uint)Math.Round(_borderRatio.R * w),
             (uint)Math.Round(_borderRatio.B * h), (uint)Math.Round(_borderRatio.L * w));
 
+    /// <summary> 获取圆角半径（像素） </summary>
+    /// <param name="minSide"> 图像的短边长（像素） </param>
+    public double GetCornerRadius(double minSide) => _cornerRatio * minSide;
+
     /// <summary> 获取文字高度（像素） </summary>
     /// <param name="bottom"> 下边框高度（像素） </param>
     public double GetTextTargetH(double bottom) => _textRatio * bottom;
+
+    /// <summary> 图标与文字的间距（像素） </summary>
+    /// <param name="textH"> 文字高度（像素） </param>
+    public double GetIconGap(double textH) => _iconGap * textH;
 
     /// <summary> 解析颜色字符串，无效则返回红色 </summary>
     /// <param name="colorStr"> 解析颜色字符串 </param>

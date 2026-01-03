@@ -41,14 +41,16 @@ internal static class InfoFuncs
     /// <summary> 获取曝光时间 </summary>
     private static string GetExposureTime(IExifProfile? exif) {
         var t = exif?.GetValue(ExifTag.ExposureTime)?.Value.ToDouble();
-        return t switch { > 0.37 => $"{t:0.#} s", > 0 => $"1/{1 / t:0} s", _ => Tofu };
+        return t switch {
+            > 100 => $"{t:0} s", > 0.37 => $"{t:0.#} s", > 0 => $"1/{1 / t:0} s", _ => Tofu
+        };
     }
 
     /// <summary> 获取实际焦距 </summary>
     private static string GetFocalLength(IExifProfile? exif) {
         var f = exif?.GetValue(ExifTag.FocalLength)?.Value.ToDouble();
         return f switch {
-            >= 37 => $"{f:0} mm", >= 3.7 => $"{f:0.#} mm", > 0 => $"{f:0.##} mm", _ => Tofu
+            >= 100 => $"{f:0} mm", >= 10 => $"{f:0.#} mm", > 0 => $"{f:0.##} mm", _ => Tofu
         };
     }
 
