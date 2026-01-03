@@ -29,8 +29,10 @@ internal sealed record Cfg(
             throw new ArgumentOutOfRangeException(
                 nameof(CornerRatio),
                 $"圆角比例`{CornerRatio}`超出[0, 0.5]范围");
-        if (BorderRatio is not { T: >= 0, R: >= 0, B: >= 0, L: >= 0 })
-            throw new ArgumentOutOfRangeException(nameof(BorderRatio), $"边框比例`{BorderRatio}`包含负数");
+        if (BorderRatio is { T: 0, R: 0, B: 0, L: 0 } or not { T: >= 0, R: >= 0, B: >= 0, L: >= 0 })
+            throw new ArgumentOutOfRangeException(
+                nameof(BorderRatio),
+                $"边框比例`{BorderRatio}`全为0或包含负数");
         if (TextRatio < 0)
             throw new ArgumentOutOfRangeException(nameof(TextRatio), $"文字比例`{TextRatio}`小于0");
     }
