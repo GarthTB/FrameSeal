@@ -20,7 +20,7 @@ internal static class Utils
         } catch (Exception ex) {
             if (ex is OperationCanceledException)
                 return;
-            var msg = $"{name}时出错{FormatExMsg(ex.Message, ex.StackTrace)}";
+            var msg = $"{name}异常{FormatExMsg(ex.Message, ex.StackTrace)}";
             MessageBox.Show(msg, "异常", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
@@ -34,7 +34,7 @@ internal static class Utils
         } catch (Exception ex) {
             if (ex is OperationCanceledException)
                 return;
-            var msg = $"{name}时出错{FormatExMsg(ex.Message, ex.StackTrace)}";
+            var msg = $"{name}异常{FormatExMsg(ex.Message, ex.StackTrace)}";
             MessageBox.Show(msg, "异常", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
@@ -45,7 +45,7 @@ internal static class Utils
     private static string FormatExMsg(string exMsg, string? stackTrace) {
         var msg = string.IsNullOrWhiteSpace(exMsg)
             ? ""
-            : $": {exMsg}";
+            : $"：{exMsg}";
         if (!string.IsNullOrWhiteSpace(stackTrace))
             msg += $"\n栈追踪：\n{stackTrace}";
         return msg;

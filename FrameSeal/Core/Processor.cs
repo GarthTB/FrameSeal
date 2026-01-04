@@ -58,12 +58,12 @@ internal static class Processor
     /// <param name="save"> 保存图像的方法 </param>
     /// <returns> 处理失败的图像路径及异常信息 </returns>
     public static IReadOnlyList<string> Run(
-        string[] imgPaths,
+        IReadOnlyCollection<string> imgPaths,
         Config config,
         Action<MagickImage, string> save) {
-        if (imgPaths.Length == 0)
+        if (imgPaths.Count == 0)
             throw new ArgumentException("没有待处理的图像", nameof(imgPaths));
-        List<string> issues = new(imgPaths.Length);
+        List<string> issues = new(imgPaths.Count);
         using var icon = config.Icon;
         foreach (var imgPath in imgPaths)
             try {
@@ -122,7 +122,7 @@ internal static class Processor
             mask.Negate(Channels.Alpha); // 变成内透外黑
 
             token?.ThrowIfCancellationRequested();
-            mask.GaussianBlur(1, 0.5, Channels.Alpha); // 抗锯齿
+            mask.GaussianBlur(0.8, 0.5, Channels.Alpha); // 抗锯齿
 
             token?.ThrowIfCancellationRequested();
             using MagickImage corners = new(config.BorderColor, oldW, oldH);

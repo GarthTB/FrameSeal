@@ -50,7 +50,7 @@ internal sealed partial class MainViewModel: ObservableObject
 
     partial void OnImgPathIdxChanged(int value) => _ = UpdatePreviewAsync(true);
 
-    /// <returns> 是否选中了图像路径 </returns>
+    /// <summary> 是否选中了图像路径 </summary>
     private bool PathSelected => ImgPathIdx >= 0 && ImgPathIdx < ImgPaths.Count;
 
     /// <summary> 添加待处理图像 </summary>
@@ -148,7 +148,7 @@ internal sealed partial class MainViewModel: ObservableObject
 
     /// <summary> 文字颜色字符串 </summary>
     [ObservableProperty]
-    private string _textColor = "#C0A208";
+    private string _textColor = "#D0A010";
 
     partial void OnIconGapChanged(string value) => _ = UpdatePreviewAsync();
     partial void OnCornerRatioChanged(string value) => _ = UpdatePreviewAsync();
@@ -244,10 +244,8 @@ internal sealed partial class MainViewModel: ObservableObject
                     await Task.Delay(128, token); // 防抖
                     if (fileChanged || _thumb is null)
                         _thumb = await Processor.GetThumb(ImgPaths[ImgPathIdx], token);
-                    PreviewImg = await Processor.Preview(
-                        (MagickImage)_thumb.Clone(),
-                        CurConfig,
-                        token);
+                    using var thumb = (MagickImage)_thumb.Clone();
+                    PreviewImg = await Processor.Preview(thumb, CurConfig, token);
                 } else
                     PreviewImg = null;
             });
@@ -256,12 +254,24 @@ internal sealed partial class MainViewModel: ObservableObject
 
     #region 执行处理
 
-    /// <summary> 判断是否可以运行 </summary>
+    /// <summary> 是否可以运行 </summary>
     private bool CanRun => ImgPaths.Count > 0;
 
     /// <summary> 打断预览并执行处理 </summary>
     [RelayCommand(CanExecute = nameof(CanRun))]
-    private void Run() {}
+    private void Run() =>
+        TryOrShow(
+            "执行处理",
+            () => {
+                _cts.Cancel();
+                _cts.Dispose();
+                _cts = new();
+                var save = SaveActions.Get(SaveFormats[SaveFormatIdx]);
+                var issues = Processor.Run(ImgPaths, CurConfig, save);
+                if (issues.Count > 0)
+                    throw new AggregateException($"以下图像处理异常：\n{string.Join('\n', issues)}");
+                ShowInfo("成功", "所有图像处理完成！");
+            });
 
     #endregion 执行处理
 }

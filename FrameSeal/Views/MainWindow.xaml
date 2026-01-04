@@ -282,7 +282,7 @@
                     VerticalContentAlignment="Center"
                     MaxLength="9"
                     Text="{Binding TextColor, UpdateSourceTrigger=PropertyChanged}"
-                    ToolTip="#RRGGBB或#RRGGBBAA，若无效则变红&#x0a;例如：#C0A208" />
+                    ToolTip="#RRGGBB或#RRGGBBAA，若无效则变红&#x0a;例如：#D0A010" />
             </Grid>
             <Grid Grid.Row="14">
                 <Grid.ColumnDefinitions>
