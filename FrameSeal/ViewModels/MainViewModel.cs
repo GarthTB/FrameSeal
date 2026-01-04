@@ -132,7 +132,7 @@ internal sealed partial class MainViewModel: ObservableObject
 
     /// <summary> 圆角比例（图像短边长的倍数）[0, 0.5] </summary>
     [ObservableProperty]
-    private string _cornerRatio = "0.025";
+    private string _cornerRatio = "0.03";
 
     /// <summary> 边框比例（图像宽高的倍数）[0,) </summary>
     [ObservableProperty]
@@ -168,7 +168,7 @@ internal sealed partial class MainViewModel: ObservableObject
     public IReadOnlyList<string> SaveFormats { get; } = SaveActions.Keys;
 
     /// <summary> 选中保存格式的索引 </summary>
-    public byte SaveFormatIdx { get; set; } = 4;
+    public byte SaveFormatIdx { get; set; } = 3;
 
     /// <summary> 所有可用的字体系列 </summary>
     public IReadOnlyList<string> FontNames { get; } = MagickNET.FontFamilies;
@@ -188,7 +188,11 @@ internal sealed partial class MainViewModel: ObservableObject
 
     /// <summary> 选中图像信息的索引 </summary>
     [ObservableProperty]
-    private byte _infoKeyIdx1, _infoKeyIdx2, _infoKeyIdx3, _infoKeyIdx4, _infoKeyIdx5;
+    private byte _infoKeyIdx1 = 1,
+        _infoKeyIdx2 = 2,
+        _infoKeyIdx3 = 4,
+        _infoKeyIdx4 = 5,
+        _infoKeyIdx5 = 6;
 
     /// <summary> 手动输入的文本 </summary>
     [ObservableProperty]

@@ -9,7 +9,6 @@ internal static class SaveActions
     /// <summary> 保存图像的方法 </summary>
     private static readonly Dictionary<string, Action<MagickImage, string>> Actions = new() {
         ["BMP"] = static (img, inPath) => img.Write(GenOutPath(inPath, "bmp"), MagickFormat.Bmp),
-        ["JPG 70质量"] = static (img, inPath) => SaveJpg(img, inPath, 70),
         ["JPG 80质量"] = static (img, inPath) => SaveJpg(img, inPath, 80),
         ["JPG 90质量"] = static (img, inPath) => SaveJpg(img, inPath, 90),
         ["JPG 96质量"] = static (img, inPath) => SaveJpg(img, inPath, 96),
@@ -55,7 +54,6 @@ internal static class SaveActions
     /// <param name="quality"> JPG质量 </param>
     private static void SaveJpg(MagickImage img, string inPath, uint quality) {
         img.Quality = quality;
-        img.Settings.SetDefine(MagickFormat.Pjpeg, "arithmetic-coding", true);
         img.Settings.SetDefine(MagickFormat.Pjpeg, "sampling-factor", "4:2:0");
         img.Write(GenOutPath(inPath, "jpg"), MagickFormat.Pjpeg);
     }
