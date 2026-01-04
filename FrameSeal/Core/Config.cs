@@ -26,10 +26,8 @@ internal sealed class Config(
 {
     /// <summary> 边框比例（图像宽高的倍数）[0,) </summary>
     private readonly (double T, double R, double B, double L) _borderRatio
-        = borderRatio is not { T: >= 0, R: >= 0, B: >= 0, L: >= 0 } or { T: 0, R: 0, B: 0, L: 0 }
-            ? throw new ArgumentOutOfRangeException(
-                nameof(borderRatio),
-                $"边框比例`{borderRatio}`包含负数或全为0")
+        = borderRatio is not { T: >= 0, R: >= 0, B: >= 0, L: >= 0 }
+            ? throw new ArgumentOutOfRangeException(nameof(borderRatio), $"边框比例`{borderRatio}`包含负数")
             : borderRatio;
 
     /// <summary> 圆角比例（图像短边长的倍数）[0, 0.5] </summary>

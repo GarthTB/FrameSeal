@@ -90,9 +90,13 @@ internal static class Processor
         var (t, r, b, l) = config.GetBorderWidth(oldW, oldH);
         var (newW, newH) = (r + oldW + l, t + oldH + b);
 
-        AddBorder();
         if (config.GetCornerRadius(Math.Min(oldW, oldH)) is var radius and > 0)
             RoundCorner();
+        if (t + r + b + l > 0) {
+            token?.ThrowIfCancellationRequested();
+            img.BackgroundColor = config.BorderColor;
+            img.Extent(0 - (int)l, 0 - (int)t, newW, newH);
+        }
 
         if (b < 1)
             return;
@@ -100,36 +104,32 @@ internal static class Processor
         var text = GetText();
         var targetTextH = config.GetTextTargetH(b);
         var (setPen, textW, textH, ascent) = string.IsNullOrWhiteSpace(text)
-            ? GetPenMeasureText()
-            : (null, 0, targetTextH, 0);
+            ? (null, 0, targetTextH, 0)
+            : GetPenMeasureText();
         var (textX, textY) = ((newW - textW) / 2, newH - (b + textH) / 2);
 
         if (icon is {})
-            textX += GetBiasAddIcon();
+            textX += MoveTextAddIcon();
         token?.ThrowIfCancellationRequested();
         setPen?.Text(textX, textY + ascent, text).Draw(img);
 
-        void AddBorder() {
-            token?.ThrowIfCancellationRequested();
-            img.Alpha(AlphaOption.Set);
-            img.BackgroundColor = config.BorderColor;
-            img.Extent(0 - (int)l, 0 - (int)t, newW, newH);
-        }
-
         void RoundCorner() {
             token?.ThrowIfCancellationRequested();
-            using MagickImage mask = new(MagickColors.White, newW, newH);
-            new Drawables().FillColor(MagickColors.None)
-                .RoundRectangle(l, t, l + oldW, t + oldH, radius, radius)
-                .Draw(mask); // 内黑外白的圆角矩形
+            using MagickImage mask = new(MagickColors.None, oldW, oldH);
+            new Drawables().FillColor(MagickColors.Black)
+                .RoundRectangle(0, 0, oldW, oldH, radius, radius)
+                .Draw(mask); // 内黑外透的圆角矩形
+            mask.Negate(Channels.Alpha); // 变成内透外黑
 
             token?.ThrowIfCancellationRequested();
-            mask.GaussianBlur(1, 0.5); // 抗锯齿
+            mask.GaussianBlur(1, 0.5, Channels.Alpha); // 抗锯齿
 
             token?.ThrowIfCancellationRequested();
-            using MagickImage border = new(config.BorderColor, newW, newH);
-            border.SetWriteMask(mask);
-            img.Composite(border, CompositeOperator.Over);
+            using MagickImage corners = new(config.BorderColor, oldW, oldH);
+            corners.Composite(mask, CompositeOperator.CopyAlpha);
+
+            token?.ThrowIfCancellationRequested();
+            img.Composite(corners, CompositeOperator.Over);
         }
 
         string GetText() {
@@ -157,7 +157,7 @@ internal static class Processor
             throw new InvalidOperationException("5次尝试后仍无法找到合适的字号");
         }
 
-        double GetBiasAddIcon() {
+        double MoveTextAddIcon() {
             token?.ThrowIfCancellationRequested();
             using var mIcon = icon.CloneAndMutate(m => m.Resize(
                 uint.MaxValue,
