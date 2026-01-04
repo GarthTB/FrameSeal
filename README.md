@@ -9,7 +9,7 @@ EXIF 元数据及自定义信息。通过高度自由的参数调整及高性能
 [![语言 C# 14.0](https://img.shields.io/badge/语言-C%23%2014.0-navy.svg)](https://github.com/dotnet/csharplang)
 [![许可 MIT](https://img.shields.io/badge/许可-MIT-brown)](https://mit-license.org)
 [![平台 Windows x64](https://img.shields.io/badge/平台-Windows%20x64-orange.svg)](https://github.com/GarthTB/FrameSeal)
-[![版本 1.3.0](https://img.shields.io/badge/版本-1.3.0-brightgreen)](https://github.com/GarthTB/FrameSeal/releases/latest)
+[![版本 1.3.1](https://img.shields.io/badge/版本-1.3.1-brightgreen)](https://github.com/GarthTB/FrameSeal/releases/latest)
 
 ## ✨ 特点
 
@@ -51,6 +51,10 @@ EXIF 元数据及自定义信息。通过高度自由的参数调整及高性能
 - **项目地址**：https://github.com/GarthTB/FrameSeal
 
 ## 📝 更新日志
+
+### v1.3.1 (20260104)
+
+- 微调参数，提升兼容性
 
 ### v1.3.0 (20260104)
 
