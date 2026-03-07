@@ -1,5 +1,7 @@
 # 📸 Frame Seal 图像边框工具 🖼
 
+# 20260308 废弃并化身为[GarthImgLab](https://github.com/GarthTB/GarthImgLab)
+
 `Frame Seal` 是一个 Windows x64 单平台的 GUI 应用，用于
 向图像四周添加仿胶片外观的纯色边框，并在下边框处嵌入图标、
 EXIF 元数据及自定义信息。通过高度自由的参数调整及高性能的
